@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golf League Betting Odds - Week 7 & Tournament</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .odds-section {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            margin: 20px 0;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .odds-section h2 {
+            color: #ffd700;
+            border-bottom: 2px solid #ffd700;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .odds-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .player-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #ffd700;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .player-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+        }
+        
+        .player-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+        
+        .odds {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #4CAF50;
+            margin: 5px 0;
+        }
+        
+        .negative-odds {
+            color: #ff6b6b;
+        }
+        
+        .stats {
+            font-size: 0.9em;
+            color: #ddd;
+            margin-top: 10px;
+        }
+        
+        .flight-badge {
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+        
+        .special-note {
+            background: rgba(255, 193, 7, 0.2);
+            border: 1px solid rgba(255, 193, 7, 0.5);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #fff3cd;
+        }
+        
+        .methodology {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+        
+        .methodology h3 {
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        th {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+            font-weight: bold;
+        }
+        
+        .highlight-favorite {
+            border-left-color: #4CAF50;
+            background: rgba(76, 175, 80, 0.1);
+        }
+        
+        .highlight-longshot {
+            border-left-color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+        }
+        
+        .quick-picks {
+            background: rgba(76, 175, 80, 0.2);
+            border: 2px solid #4CAF50;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .quick-picks h3 {
+            color: #4CAF50;
+            margin-top: 0;
+        }
+        
+        .pick-item {
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+        
+        .pick-odds {
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .odds-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .player-card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏌️ Golf League Betting Odds</h1>
+        <p style="text-align: center; opacity: 0.8;">Week 7 & Tournament Winners • American Odds Format</p>
+        
+        <div class="special-note">
+            <strong>📊 Hoffman Projection Alert:</strong> Using 2024 data (36, 38 average = 37) to forecast massive upside potential in 2025. 
+            With only 2 scores counting and 4 rounds remaining, projected at his 2024 pace: ~296 total (A Flight contender).
+        </div>
+        
+        <div class="quick-picks">
+            <h3>🔥 Top Value Picks</h3>
+            <div class="pick-item">
+                <strong>Best Overall Bet:</strong> <span class="pick-odds">Hoffman +180 Tournament Winner</span><br>
+                <small>Only 2 scores counting, 2024 form suggests he could challenge for the lead</small>
+            </div>
+            <div class="pick-item">
+                <strong>Week 7 Special:</strong> <span class="pick-odds">Hoffman +250</span><br>
+                <small>If 2024 form returns (36-38 range), he's severely underpriced</small>
+            </div>
+            <div class="pick-item">
+                <strong>Flight Value:</strong> <span class="pick-odds">Wall +120 B Flight Gross</span><br>
+                <small>Tied for lead with plus odds - essentially a coin flip</small>
+            </div>
+        </div>
+        
+        <!-- Week 7 Odds -->
+        <div class="odds-section">
+            <h2>🎯 Week 7 Winner Odds</h2>
+            <div class="odds-grid">
+                <div class="player-card highlight-favorite">
+                    <div class="player-name">Olson <span class="flight-badge">A Flight</span></div>
+                    <div class="odds negative-odds">-150</div>
+                    <div class="stats">Current overall leader (145 net)<br>Consistent 40-51 scoring range<br>Safest Week 7 pick</div>
+                </div>
+                
+                <div class="player-card" style="border-left-color: #ff9800; background: rgba(255, 152, 0, 0.1);">
+                    <div class="player-name">Hoffman <span class="flight-badge">A Flight</span></div>
+                    <div class="odds">+250</div>
+                    <div class="stats">🚀 HIGH UPSIDE PLAY<br>2024 form: 36-38 average<br>Only 2 scores counting - fresh legs</div>
+                </div>
+                
+                <div class="player-card">
+                    <div class="player-name">Knox <span class="flight-badge">A Flight</span></div>
+                    <div class="odds">+300</div>
+                    <div class="stats">Solid A Flight performer<br>43-51 scoring range<br>Reliable choice</div>
+                </div>
+                
+                <div class="player-card">
+                    <div class="player-name">Stroker <span class="flight-badge">B Flight</span></div>
+                    <div class="odds">+400</div>
+                    <div class="stats">B Flight leader (tied)<br>Improving trend 44-53<br>Flight favorite</div>
+                </div>
+                
+                <div class="player-card">
+                    <div class="player-name">Wall <span class="flight-badge">B Flight</span></div>
+                    <div class="odds">+450</div>
+                    <div class="stats">B Flight co-leader<br>Consistent 45-52 range<br>Steady performer</div>
+                </div>
+                
+                <div class="player-card">
+                    <div class="player-name">Wharry <span class="flight-badge">B Flight</span></div>
+                    <div class="odds">+500</div>
+                    <div class="stats">All 6 rounds completed<br>47-57 range, trending up<br>Experience edge</div>
+                </div>
+                
+                <div class="player-card">
+                    <div class="player-name">Johnson <span class="flight-badge">B Flight</span></div>
+                    <div class="odds">+600</div>
+                    <div class="stats">Steady B Flight player<br>49-52 recent consistency<br>Dark horse candidate</div>
+                </div>
+                
+                <div class="player-card">
+                    <div class="player-name">Corey <span class="flight-badge">A Flight</span></div>
+                    <div class="odds">+650</div>
+                    <div class="stats">A Flight upside<br>46-52 scoring range<br>Boom or bust play</div>
+                </div>
+                
+                <div class="player-card highlight-longshot">
+                    <div class="player-name">Albers <span class="flight-badge">A Flight</span></div>
+                    <div class="odds">+800</div>
+                    <div class="stats">Recent struggles<br>47-52 higher trend<br>Long shot special</div>
+                </div>
+                
+                <div class="player-card highlight-longshot">
+                    <div class="player-name">Stromwall <span class="flight-badge">B Flight</span></div>
+                    <div class="odds">+1000</div>
+                    <div class="stats">Inconsistent form<br>48-59 wide range<br>Needs career round</div>
+                </div>
+                
+                <div class="player-card highlight-longshot">
+                    <div class="player-name">Lee <span class="flight-badge">A Flight</span></div>
+                    <div class="odds">+1200</div>
+                    <div class="stats">Struggling badly<br>42-63 huge variance<br>Miracle ticket only</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Overall Tournament Odds -->
+        <div class="odds-section">
+            <h2>🏆 Overall Tournament Winner Odds (Net)</h2>
+            <div class="odds-grid">
+                <div class="player-card highlight-favorite">
+                    <div class="player-name">Olson <span class="flight-badge">A Flight</span></div>
+                    <div class="odds negative-odds">-200</div>
+                    <div class="stats">Leading at 145 net<br>10+ stroke cushion<br>Clear tournament favorite</div>
+                </div>
+                
+                <div class="player-card" style="border-left-color: #ff9800; background: rgba(255, 152, 0, 0.15);">
+                    <div class="player-name">Hoffman <span class="flight-badge">A Flight</span></div>
+                    <div class="odds">+180</div>
+                    <div class="stats">🎰 MASSIVE UPSIDE BET<br>Only 74 total (2 rounds)<br>2024 pace = ~185 final total<br>Could challenge Olson!</div>
+                </div>
+                
+                <div class="player-card">
+                    <div class="player-name">Stroker <span class="flight-badge">B Flight</span></div>
+                    <div class="odds">+400</div>
+                    <div class="stats">155 total, 10 back<br>Solid improvement trend<br>B Flight's best hope</div>
+                </div>
+                
+                <div class="player-card">
+                    <div class="player-name">Wharry <span class="flight-badge">B Flight</span></div>
+                    <div class="odds">+500</div>
+                    <div class="stats">156 total, 11 back<br>All rounds complete<br>No more scores to add</div>
+                </div>
+                
+                <div class="player-card">
+                    <div class="player-name">Wall <span class="flight-badge">B Flight</span></div>
+                    <div class="odds">+600</div>
+                    <div class="stats">162 total, 17 back<br>Needs exceptional finish<br>Capable of low rounds</div>
+                </div>
+                
+                <div class="player-card">
+                    <div class="player-name">Johnson <span class="flight-badge">B Flight</span></div>
+                    <div class="odds">+700</div>
+                    <div class="stats">163 total, 18 back<br>Steady but needs fireworks<br>Long shot value</div>
+                </div>
+                
+                <div class="player-card">
+                    <div class="player-name">Knox <span class="flight-badge">A Flight</span></div>
+                    <div class="odds">+700</div>
+                    <div class="stats">163 total, 18 back<br>A Flight experience<br>Capable of hot streak</div>
+                </div>
+                
+                <div class="player-card">
+                    <div class="player-name">Corey <span class="flight-badge">A Flight</span></div>
+                    <div class="odds">+900</div>
+                    <div class="stats">166 total, 21 back<br>A Flight skill level<br>Needs perfect storm</div>
+                </div>
+                
+                <div class="player-card highlight-longshot">
+                    <div class="player-name">Albers <span class="flight-badge">A Flight</span></div>
+                    <div class="odds">+1500</div>
+                    <div class="stats">170 total, 25 back<br>Mountain to climb<br>Lottery ticket only</div>
+                </div>
+                
+                <div class="player-card highlight-longshot">
+                    <div class="player-name">Lee <span class="flight-badge">A Flight</span></div>
+                    <div class="odds">+2000</div>
+                    <div class="stats">181 total, 36 back<br>Nearly mathematically eliminated<br>Miracle required</div>
+                </div>
+                
+                <div class="player-card highlight-longshot">
+                    <div class="player-name">Stromwall <span class="flight-badge">B Flight</span></div>
+                    <div class="odds">+2000</div>
+                    <div class="stats">181 total, 36 back<br>Would need career performance<br>Hail Mary play</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Flight Championships -->
+        <div class="odds-section">
+            <h2>✈️ Flight Championship Odds (Gross Scoring)</h2>
+            
+            <h3 style="color: #ffd700; margin-top: 30px;">A Flight Gross Winner</h3>
+            <table>
+                <tr><th>Player</th><th>Current Score</th><th>Deficit</th><th>Odds</th><th>Analysis</th></tr>
+                <tr><td><strong>Olson</strong></td><td>170</td><td>Leader</td><td class="negative-odds"><strong>-300</strong></td><td>Commanding 17-stroke lead</td></tr>
+                <tr><td><strong>Hoffman</strong></td><td>83 (2 rounds)</td><td>TBD</td><td><strong style="color: #ff9800;">+150</strong></td><td>🔥 BEST VALUE - projects ~296 total</td></tr>
+                <tr><td>Knox</td><td>187</td><td>+17</td><td>+250</td><td>Solid but significant gap</td></tr>
+                <tr><td>Albers</td><td>193</td><td>+23</td><td>+800</td><td>Long shot, needs miracle</td></tr>
+                <tr><td>Corey</td><td>197</td><td>+27</td><td>+1000</td><td>Nearly out of contention</td></tr>
+                <tr><td>Lee</td><td>213</td><td>+43</td><td>+2500</td><td>Mathematically alive only</td></tr>
+            </table>
+            
+            <h3 style="color: #ffd700; margin-top: 30px;">B Flight Gross Winner</h3>
+            <table>
+                <tr><th>Player</th><th>Current Score</th><th>Deficit</th><th>Odds</th><th>Analysis</th></tr>
+                <tr><td><strong>Stroker</strong></td><td>195</td><td>Leader</td><td class="negative-odds"><strong>-180</strong></td><td>Slight edge in tight race</td></tr>
+                <tr><td><strong>Wall</strong></td><td>195</td><td>Tied</td><td><strong style="color: #4CAF50;">+120</strong></td><td>🎯 GREAT VALUE - dead even!</td></tr>
+                <tr><td>Wharry</td><td>200</td><td>+5</td><td>+300</td><td>Close enough to make move</td></tr>
+                <tr><td>Johnson</td><td>201</td><td>+6</td><td>+400</td><td>Within striking distance</td></tr>
+                <tr><td>Stromwall</td><td>212</td><td>+17</td><td>+1200</td><td>Needs exceptional rounds</td></tr>
+            </table>
+        </div>
+        
+        <div class="methodology">
+            <h3>📈 Betting Analysis & Methodology</h3>
+            
+            <div style="background: rgba(255, 152, 0, 0.2); padding: 15px; border-radius: 10px; margin: 15px 0;">
+                <h4 style="color: #ff9800; margin-top: 0;">🚀 The Hoffman Factor</h4>
+                <p>Hoffman presents the most intriguing betting opportunity. With only 2 scores counting (40, 43 = 83 total), he needs 4 more rounds. His 2024 performance (36, 38 average) suggests he's capable of 37-40 per round going forward.</p>
+                <p><strong>Projection:</strong> 83 + (37 × 4) = ~231 total vs current leader at 145. Even accounting for net vs gross differences, he has legitimate upside to contend.</p>
+            </div>
+            
+            <p><strong>Odds Methodology:</strong> American format where negative odds show favorites (bet that amount to win $100) and positive odds show underdogs (win that amount on $100 bet). Calculations based on:</p>
+            
+            <ul>
+                <li><strong>Current Position:</strong> Stroke differential and rounds remaining</li>
+                <li><strong>Historical Performance:</strong> Scoring patterns and consistency</li>
+                <li><strong>Course Conditions:</strong> Typical scoring ranges for this league</li>
+                <li><strong>Mathematical Probability:</strong> Required performance to win</li>
+                <li><strong>Sample Size Adjustments:</strong> Hoffman's limited 2025 data</li>
+            </ul>
+            
+            <p><strong>Key Betting Considerations:</strong></p>
+            <ul>
+                <li>Net scoring (with handicaps) determines overall winner</li>
+                <li>Gross scoring determines flight winners</li>
+                <li>Weather and course conditions affect final rounds</li>
+                <li>Some players have more rounds remaining than others</li>
+                <li>Flight placement affects competitive matchups</li>
+            </ul>
+            
+            <div style="background: rgba(76, 175, 80, 0.2); padding: 15px; border-radius: 10px; margin-top: 20px;">
+                <h4 style="color: #4CAF50; margin-top: 0;">💡 Smart Betting Strategy</h4>
+                <p><strong>Conservative:</strong> Olson (-150) for Week 7, (-200) overall<br>
+                <strong>Value Play:</strong> Hoffman (+250) Week 7, (+180) overall<br>
+                <strong>Longshot Special:</strong> Wall (+120) B Flight - tied for lead with plus odds!</p>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px; opacity: 0.7; font-size: 0.9em;">
+            <p>🏌️ Generated for Golf League Betting • Week 7 & Tournament Analysis</p>
+            <p>Odds are for entertainment purposes • Always gamble responsibly</p>
+        </div>
+    </div>
+</body>
+</html>
